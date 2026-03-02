@@ -9,15 +9,11 @@ pipeline {
       }
     }
 
-    stage('Docker Build') {
+    stage('Build Image with Minikube') {
       steps {
         sh '''
-          #!/usr/bin/env bash
           set -e
-
-          export MINIKUBE_PROFILE=minikube
-          eval "$(minikube docker-env)"
-          docker build -t node-app:1.0 .
+          minikube image build -t node-app:1.0 .
         '''
       }
     }
